@@ -1,0 +1,11 @@
+services:
+  portafolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: enew-portafolio
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    env_file:
+      - .env.local

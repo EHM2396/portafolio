@@ -1,0 +1,15 @@
+export const technologies: string[] = [
+  "TypeScript",
+  "JavaScript",
+  "Angular",
+  "React",
+  "Node.js",
+  "Express.js",
+  "PostgreSQL",
+  "MySQL",
+  "Python",
+  "Java",
+  "REST APIs",
+  "Git",
+  "Docker",
+];
