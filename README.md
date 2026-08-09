@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# 🚀 Portafolio — Erick Herrera Muñoz
 
-First, run the development server:
+### Convierto ideas y procesos en software.
+
+Desarrollo páginas web, aplicaciones, plataformas empresariales y soluciones de automatización a medida — desde una landing sencilla hasta un SaaS con inteligencia artificial integrada.
+
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?logo=framer&logoColor=white)](https://www.framer.com/motion/)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?logo=vercel&logoColor=white)](https://vercel.com)
+[![License](https://img.shields.io/badge/license-MIT-informational)](#licencia)
+
+[LinkedIn](https://www.linkedin.com/in/erick-herrera-mu%C3%B1oz-5a3502229/) · [GitHub](https://github.com/EHM2396) · [Contacto](mailto:erickpro23@gmail.com)
+
+</div>
+
+---
+
+## 📖 Sobre este proyecto
+
+Este repositorio es el código fuente de mi **portafolio profesional y vitrina de servicios freelance**: no es un CV tradicional, sino un sitio pensado para que cualquier visitante —técnico o no— entienda en segundos qué puedo construir y cómo contactarme.
+
+Incluye casos de estudio reales de proyectos que he desarrollado, entre ellos **Ciolix**, una plataforma propia de automatización de causación contable con sugerencias asistidas por IA.
+
+## ✨ Funcionalidades
+
+- 🎨 **Diseño oscuro/claro** con transición completa (`next-themes`), sin flash de tema incorrecto al cargar.
+- 🌐 **Español / Inglés** con selector persistente, sin recargar la página.
+- 🧩 **Casos de estudio dinámicos** por proyecto (`/proyectos/[slug]`) generados a partir de un único archivo de datos tipado.
+- 📬 **Formulario de contacto funcional** conectado a [Resend](https://resend.com) vía una Route Handler propia — sin backend externo.
+- ⚡ Animaciones sutiles con `framer-motion`, optimizadas para no afectar el rendimiento de scroll.
+- 🔍 SEO listo: metadata, Open Graph, Twitter cards, `sitemap.xml` y `robots.txt` dinámicos.
+- 📱 100% responsive, con especial cuidado en navegación, formularios y galerías en mobile.
+- 🐳 Dockerfile multi-stage listo para self-hosting, además de despliegue nativo en Vercel.
+
+## 🛠️ Stack técnico
+
+| Categoría | Tecnología |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Lenguaje | TypeScript |
+| Estilos | Tailwind CSS v4 |
+| Animaciones | Framer Motion |
+| Iconos | lucide-react |
+| Tema | next-themes |
+| Email | Resend |
+| Contenedores | Docker / docker-compose |
+| Hosting | Vercel (free tier) |
+
+## 🚀 Empezar en local
 
 ```bash
+git clone https://github.com/EHM2396/portafolio.git
+cd portafolio
+npm install
+cp .env.local.example .env.local   # agrega tu RESEND_API_KEY
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Variables de entorno
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Descripción |
+|---|---|
+| `RESEND_API_KEY` | API key de [resend.com](https://resend.com) usada por `src/app/api/contact/route.ts` para enviar los mensajes del formulario de contacto. |
 
-## Learn More
+## 🐳 Correr con Docker
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+docker compose up -d --build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Sirve la build de producción en [http://localhost:3000](http://localhost:3000), leyendo las variables de `.env.local`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ☁️ Despliegue
 
-## Deploy on Vercel
+Optimizado para el plan gratuito de [Vercel](https://vercel.com/new): se importa el repositorio, se agrega `RESEND_API_KEY` como variable de entorno y cada push a `master` se despliega automáticamente.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📂 Estructura del proyecto
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/                  # Rutas (App Router): home, /proyectos/[slug], sitemap, robots, api/contact
+├── components/
+│   ├── sections/         # Hero, Services, AiSection, Projects, Technologies, Experience, HowIWork, Contact, Footer, Navbar
+│   └── ui/               # Primitivos reutilizables (Button, Card, Badge, Container, Reveal...)
+├── data/                 # Contenido del sitio: proyectos, servicios, tecnologías, experiencia
+├── i18n/                 # Contexto de idioma y diccionario de traducciones
+├── types/                # Tipos compartidos (Project, Locale...)
+└── lib/                  # Utilidades
+```
+
+Agregar un proyecto nuevo al portafolio es tan simple como añadir un objeto a `src/data/projects.ts` — la interfaz `Project` fuerza a completar problema, solución, features, tecnologías, estado y participación real en el proyecto.
+
+## 📄 Licencia
+
+MIT — puedes usar este proyecto como referencia para el tuyo propio.
+
+---
+
+<div align="center">
+
+Hecho por **Erick Herrera Muñoz** · Full Stack Developer · Colombia
+
+</div>
