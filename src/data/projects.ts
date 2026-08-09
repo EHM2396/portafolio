@@ -50,7 +50,7 @@ export const projects: Project[] = [
       "OpenAI API",
     ],
     images: [],
-    demoUrl: undefined,
+    demoUrl: "https://smart-causation-52ig.vercel.app/",
     projectUrl: undefined,
     status: "En desarrollo",
     myRole: {
