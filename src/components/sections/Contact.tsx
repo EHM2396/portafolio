@@ -16,10 +16,13 @@ export function Contact() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    // El evento nativo pierde `currentTarget` en cuanto cruza un `await`,
+    // así que guardamos la referencia del formulario antes de la llamada async.
+    const form = event.currentTarget;
     setStatus("submitting");
     setErrorMessage(null);
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
 
     try {
@@ -35,7 +38,7 @@ export function Contact() {
       }
 
       setStatus("sent");
-      event.currentTarget.reset();
+      form.reset();
     } catch (error) {
       setStatus("error");
       setErrorMessage(error instanceof Error ? error.message : t.contact.genericError);
