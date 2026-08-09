@@ -153,7 +153,8 @@ export const projects: Project[] = [
     },
     technologies: ["React", "Node.js", "PostgreSQL", "Vite"],
     images: [],
-    status: "En desarrollo",
+    projectUrl: "https://como-seria-menu.vercel.app/",
+    status: "Disponible",
     myRole: {
       es: "Proyecto desarrollado en colaboración.",
       en: "Project developed in collaboration.",
