@@ -62,6 +62,12 @@ export function ProjectDetail({ project }: { project: Project }) {
           </Button>
         </div>
 
+        {project.demoUrl && project.demoNote && (
+          <p className="mt-3 max-w-2xl text-xs text-slate-500 dark:text-slate-500">
+            {project.demoNote[locale]}
+          </p>
+        )}
+
         <div className="mt-14 grid gap-8 sm:grid-cols-2">
           <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 dark:border-white/10 dark:bg-white/[0.02]">
             <h2 className="text-lg font-semibold text-slate-900 dark:text-white">

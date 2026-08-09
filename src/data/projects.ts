@@ -51,6 +51,10 @@ export const projects: Project[] = [
     ],
     images: [],
     demoUrl: "https://smart-causation-52ig.vercel.app/",
+    demoNote: {
+      es: "Producto en desarrollo activo y continuo, actualmente en fase de pruebas. Todavía no tiene planes de adquisición ni precios definidos.",
+      en: "Actively and continuously developed product, currently in a testing phase. Pricing and acquisition plans are not defined yet.",
+    },
     projectUrl: undefined,
     status: "En desarrollo",
     myRole: {

@@ -24,6 +24,8 @@ export interface Project {
   /** Puede ir vacío mientras no existan capturas reales. */
   images: string[];
   demoUrl?: string;
+  /** Aclaración corta que acompaña al botón de demo (ej. estado real del entorno, sin planes/precios aún). */
+  demoNote?: LocalizedText;
   projectUrl?: string;
   status: ProjectStatus;
   myRole: LocalizedText;
