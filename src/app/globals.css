@@ -1,38 +1,51 @@
 @import "tailwindcss";
 
-/* Estrategia de dark mode por clase (usada por next-themes), en vez del
-   `prefers-color-scheme` por defecto de Tailwind v4. */
+/* Dark mode por clase (ver ThemeProvider), en vez del `prefers-color-scheme` de Tailwind. */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+  Paleta: se conserva el violeta y el cian del portafolio, pero con roles claros.
+  - violeta: único color de acción (enlaces, foco, selección).
+  - cian: solo señala "en producción"; no se usa como decoración.
+  - fondos con matiz frío, sin negro puro ni blanco puro.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --dot-color: rgba(15, 23, 42, 0.09);
-  --glow-violet-color: rgba(139, 92, 246, 0.14);
-  --glow-cyan-color: rgba(34, 211, 238, 0.12);
+  --background: #f7f6fb;
+  --surface: #ffffff;
+  --foreground: #14122b;
+  --muted: #5d5a78;
+  --line: #dcd9ec;
+  --accent: #6d4de0;
+  --accent-ink: #ffffff;
+  --live: #0891b2;
 }
 
 .dark {
-  --background: #0a0a0f;
-  --foreground: #f1f5f9;
-  --dot-color: rgba(255, 255, 255, 0.14);
-  --glow-violet-color: rgba(139, 92, 246, 0.35);
-  --glow-cyan-color: rgba(34, 211, 238, 0.3);
+  --background: #0d0c18;
+  --surface: #14122a;
+  --foreground: #efedfb;
+  --muted: #a09db8;
+  --line: #28254a;
+  --accent: #a58bff;
+  --accent-ink: #0d0c18;
+  --live: #22d3ee;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-live: var(--live);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
 }
 
 * {
-  border-color: rgba(148, 163, 184, 0.25);
-}
-
-.dark * {
-  border-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--line);
 }
 
 html {
@@ -42,36 +55,56 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.6;
 }
 
 ::selection {
-  background: rgba(139, 92, 246, 0.35);
-  color: #fff;
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 
-/* Grid de puntos de fondo, sutil, tipo "blueprint" tecnológico */
-.bg-dot-grid {
-  background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
-  background-size: 28px 28px;
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
-/* Glow decorativo reutilizable en secciones */
-.glow-violet {
-  background: radial-gradient(closest-side, var(--glow-violet-color), transparent);
-}
-
-.glow-cyan {
-  background: radial-gradient(closest-side, var(--glow-cyan-color), transparent);
-}
-
-.text-gradient {
-  background: linear-gradient(90deg, #a78bfa 0%, #22d3ee 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.font-display {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-optical-sizing: auto;
 }
 
 .text-balance {
   text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Punto de estado: pulso lento solo en "En producción". */
+@keyframes live-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--live) 55%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--live) 0%, transparent);
+  }
+}
+
+.live-dot {
+  animation: live-pulse 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .live-dot {
+    animation: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
 }

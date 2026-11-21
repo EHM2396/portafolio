@@ -20,29 +20,13 @@ export const translations = {
       languageLabel: "Idioma",
     },
     hero: {
-      badge: "Desde una página web hasta una plataforma empresarial.",
-      titleBefore: "Convierto ",
-      titleHighlight: "ideas y procesos",
-      titleAfter: " en software.",
+      title: "Software que ya está en uso, no solo en el portafolio.",
       paragraph:
-        "Desarrollo páginas web, aplicaciones, plataformas empresariales y soluciones de automatización a medida.",
+        "Soy Erick, desarrollador full stack en Colombia, disponible para nuevos proyectos y para un empleo. Construyo páginas, plataformas y automatizaciones a medida. En mi tiempo libre colaboro con BUILDEV, un emprendimiento con dos productos en producción que ya facturan.",
       ctaProjects: "Ver proyectos",
       ctaContact: "Cuéntame tu proyecto",
-      code: {
-        comment: "// del problema a la solución",
-        varName: "proceso",
-        manualLabel: "manual",
-        repetitiveLabel: "repetitivo",
-        fnName: "automatizar",
-        paramName: "proceso",
-        sysName: "sistema",
-        methodName: "construir",
-      },
-      chips: {
-        automation: "Automatización",
-        apis: "APIs",
-        ai: "IA aplicada",
-      },
+      indexTitle: "Lo que he construido",
+      play: "Google Play",
     },
     services: {
       eyebrow: "Servicios",
@@ -142,9 +126,9 @@ export const translations = {
       },
     },
     ai: {
-      label: "Desarrollo web, software y automatización con tecnología moderna e",
-      labelHighlight: "inteligencia artificial",
-      title: "🤖 Inteligencia artificial aplicada a soluciones reales",
+      label: "",
+      labelHighlight: "",
+      title: "Inteligencia artificial aplicada a soluciones reales",
       paragraph:
         "La inteligencia artificial no tiene que estar reservada para grandes plataformas. Cuando puede mejorar una experiencia, automatizar una tarea, procesar información o aportar una nueva capacidad al producto, podemos integrarla directamente en la solución.",
       groups: {
@@ -207,15 +191,17 @@ export const translations = {
     },
     projects: {
       eyebrow: "Proyectos",
-      title: "Proyectos destacados",
+      title: "Proyectos",
       description:
-        "Una muestra de lo que puedo construir: desde automatización empresarial hasta sitios sencillos. Cada caso incluye el problema, la solución y mi participación real.",
-      viewCaseStudy: "Ver caso de estudio",
+        "Todos están en producción. Cada caso cuenta el problema, la solución y cuál fue mi participación.",
+      viewCaseStudy: "Ver caso",
+      operatedBy: "Opera",
       aiIntegrated: "IA integrada",
       plannedCapabilities: "Capacidades previstas",
       moreTechPrefix: "+",
     },
     projectStatus: {
+      "En producción": "En producción",
       Disponible: "Disponible",
       "En desarrollo": "En desarrollo",
       "Proyecto privado": "Proyecto privado",
@@ -223,12 +209,14 @@ export const translations = {
     technologies: {
       eyebrow: "Tecnologías que respaldan estas soluciones",
     },
-    experience: {
-      eyebrow: "Experiencia",
-      title: "Trayectoria profesional",
-      placeholderBadge: "Próximamente",
-      placeholderDescription:
-        "Esta sección se actualizará con experiencia profesional verificable. Para proyectos empresariales privados, la información se presenta de forma general: proyecto desarrollado profesionalmente, con detalles, datos y funcionalidades que no se muestran públicamente por razones de confidencialidad.",
+    buildev: {
+      title: "BUILDEV, mi emprendimiento en paralelo",
+      paragraph:
+        "BUILDEV es el emprendimiento que opera y factura Rentablo y Agendorio. Colaboro en mi tiempo libre y estoy apostando a que crezca: construyo, publico y mantengo esos productos, desde la base de datos hasta la tienda de aplicaciones.",
+      items: [
+        "Rentablo: la desarrollé casi por completo desde el inicio, con app Flutter y API propia, y después la integré a BUILDEV. Está publicada en Google Play.",
+        "Agendorio: plataforma web con asistente de WhatsApp, cobro de planes con Bold y app Android en Google Play. La desarrollé en colaboración dentro de BUILDEV.",
+      ],
     },
     howIWork: {
       eyebrow: "Metodología",
@@ -290,7 +278,9 @@ export const translations = {
     projectPage: {
       back: "Volver a proyectos",
       viewDemo: "Ver demo",
-      viewProject: "Ver proyecto",
+      viewProject: "Ver sitio",
+      viewOnPlay: "Ver en Google Play",
+      screens: "Pantallas de la app",
       talkAboutProject: "Hablemos de tu proyecto",
       problem: "El problema",
       solution: "La solución",
@@ -320,29 +310,13 @@ export const translations = {
       languageLabel: "Language",
     },
     hero: {
-      badge: "From a simple website to an enterprise platform.",
-      titleBefore: "I turn ",
-      titleHighlight: "ideas and processes",
-      titleAfter: " into software.",
+      title: "Software that is already in use, not just in a portfolio.",
       paragraph:
-        "I build websites, applications, enterprise platforms, and custom automation solutions.",
+        "I'm Erick, a full stack developer in Colombia, available for new projects and for a full-time job. I build websites, platforms and custom automations. In my free time I collaborate with BUILDEV, a venture with two products in production that already bill customers.",
       ctaProjects: "View projects",
       ctaContact: "Tell me about your project",
-      code: {
-        comment: "// from problem to solution",
-        varName: "process",
-        manualLabel: "manual",
-        repetitiveLabel: "repetitive",
-        fnName: "automate",
-        paramName: "process",
-        sysName: "system",
-        methodName: "build",
-      },
-      chips: {
-        automation: "Automation",
-        apis: "APIs",
-        ai: "Applied AI",
-      },
+      indexTitle: "What I've built",
+      play: "Google Play",
     },
     services: {
       eyebrow: "Services",
@@ -442,9 +416,9 @@ export const translations = {
       },
     },
     ai: {
-      label: "Web development, software, and automation with modern technology and",
-      labelHighlight: "artificial intelligence",
-      title: "🤖 Artificial intelligence applied to real solutions",
+      label: "",
+      labelHighlight: "",
+      title: "Artificial intelligence applied to real solutions",
       paragraph:
         "Artificial intelligence doesn't have to be reserved for large platforms. When it can improve an experience, automate a task, process information, or add a new capability to the product, we can integrate it directly into the solution.",
       groups: {
@@ -506,15 +480,17 @@ export const translations = {
     },
     projects: {
       eyebrow: "Projects",
-      title: "Featured projects",
+      title: "Projects",
       description:
-        "A sample of what I can build: from business automation to simple sites. Each case includes the problem, the solution, and my real involvement.",
-      viewCaseStudy: "View case study",
+        "All of them are in production. Each case covers the problem, the solution and what my part was.",
+      viewCaseStudy: "View case",
+      operatedBy: "Run by",
       aiIntegrated: "AI integrated",
       plannedCapabilities: "Planned capabilities",
       moreTechPrefix: "+",
     },
     projectStatus: {
+      "En producción": "In production",
       Disponible: "Available",
       "En desarrollo": "In development",
       "Proyecto privado": "Private project",
@@ -522,12 +498,14 @@ export const translations = {
     technologies: {
       eyebrow: "Technologies behind these solutions",
     },
-    experience: {
-      eyebrow: "Experience",
-      title: "Professional background",
-      placeholderBadge: "Coming soon",
-      placeholderDescription:
-        "This section will be updated with verifiable professional experience. For private business projects, information is presented in general terms: a professionally developed project, with details, data, and functionality not shown publicly for confidentiality reasons.",
+    buildev: {
+      title: "BUILDEV, my side venture",
+      paragraph:
+        "BUILDEV is the venture that runs and bills Rentablo and Agendorio. I collaborate in my free time and I'm betting on it growing: I build, publish and maintain those products, from the database to the app store.",
+      items: [
+        "Rentablo: I built almost all of it from the start, with a Flutter app and its own API, and later integrated it into BUILDEV. It's published on Google Play.",
+        "Agendorio: web platform with a WhatsApp assistant, plans billed through Bold and an Android app on Google Play. I built it in collaboration within BUILDEV.",
+      ],
     },
     howIWork: {
       eyebrow: "Methodology",
@@ -589,7 +567,9 @@ export const translations = {
     projectPage: {
       back: "Back to projects",
       viewDemo: "View demo",
-      viewProject: "View project",
+      viewProject: "Visit site",
+      viewOnPlay: "View on Google Play",
+      screens: "App screens",
       talkAboutProject: "Let's talk about your project",
       problem: "The problem",
       solution: "The solution",

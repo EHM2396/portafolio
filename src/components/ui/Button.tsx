@@ -27,21 +27,19 @@ interface ButtonAsLink extends BaseProps {
 type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950 disabled:opacity-50 disabled:pointer-events-none whitespace-nowrap";
+  "inline-flex cursor-pointer items-center justify-center gap-2 rounded-md font-medium transition-colors duration-150 disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap";
 
 const variants: Record<Variant, string> = {
-  primary:
-    "bg-gradient-to-r from-violet-500 to-cyan-400 text-slate-950 shadow-[0_0_0_1px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_-5px_rgba(139,92,246,0.6)] hover:brightness-110 active:brightness-95",
+  primary: "bg-accent text-accent-ink hover:brightness-110 active:brightness-95",
   secondary:
-    "border border-slate-200 bg-slate-100/60 text-slate-800 hover:bg-slate-200/60 hover:border-slate-300 dark:border-white/15 dark:bg-white/[0.03] dark:text-slate-100 dark:hover:bg-white/[0.08] dark:hover:border-white/25",
-  ghost:
-    "text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-white/[0.06]",
+    "border border-foreground/25 text-foreground hover:border-foreground/60 hover:bg-foreground/[0.04]",
+  ghost: "text-muted underline-offset-4 hover:text-foreground hover:underline",
 };
 
 const sizes: Record<Size, string> = {
-  sm: "px-4 py-2 text-sm",
-  md: "px-6 py-3 text-sm sm:text-base",
-  lg: "px-7 py-3.5 text-base",
+  sm: "px-3.5 py-2 text-sm",
+  md: "px-5 py-2.5 text-sm sm:text-base",
+  lg: "px-6 py-3 text-base",
 };
 
 export function Button(props: ButtonProps) {
@@ -64,7 +62,7 @@ export function Button(props: ButtonProps) {
       <a
         href={props.href}
         onClick={props.onClick}
-        target={isAnchor ? undefined : props.target ?? "_blank"}
+        target={isAnchor ? undefined : (props.target ?? "_blank")}
         rel={isAnchor ? undefined : "noreferrer noopener"}
         className={classes}
       >

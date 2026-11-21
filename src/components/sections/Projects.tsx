@@ -1,80 +1,151 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Card } from "@/components/ui/Card";
-import { Badge, StatusBadge } from "@/components/ui/Badge";
-import { Reveal } from "@/components/ui/Reveal";
+import { StatusBadge } from "@/components/ui/Badge";
 import { projects } from "@/data/projects";
 import { useLocale } from "@/i18n/LocaleContext";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export function Projects() {
   const { locale, t } = useLocale();
+  const root = useRef<HTMLElement>(null);
+
+  // Movimiento discreto: cada proyecto aparece una vez al llegar a la vista y las
+  // capturas se desplazan apenas a distinta velocidad al hacer scroll.
+  useEffect(() => {
+    const mm = gsap.matchMedia();
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const ctx = gsap.context(() => {
+        gsap.utils.toArray<HTMLElement>("[data-project]").forEach((el) => {
+          gsap.from(el, {
+            y: 12,
+            opacity: 0,
+            duration: 1.1,
+            ease: "sine.out",
+            scrollTrigger: { trigger: el, start: "top 85%", once: true },
+          });
+        });
+        gsap.utils.toArray<HTMLElement>("[data-speed]").forEach((el) => {
+          const speed = Number(el.dataset.speed);
+          gsap.fromTo(
+            el,
+            { yPercent: speed },
+            {
+              yPercent: -speed,
+              ease: "none",
+              scrollTrigger: {
+                trigger: el.closest("[data-project]"),
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1.5,
+              },
+            },
+          );
+        });
+      }, root);
+      return () => ctx.revert();
+    });
+    return () => mm.revert();
+  }, []);
 
   return (
-    <section id="proyectos" className="relative py-20 sm:py-28">
+    <section ref={root} id="proyectos" className="scroll-mt-16 py-20 sm:py-28">
       <Container>
-        <Reveal>
-          <SectionHeading
-            eyebrow={t.projects.eyebrow}
-            title={t.projects.title}
-            description={t.projects.description}
-          />
-        </Reveal>
+        <SectionHeading title={t.projects.title} description={t.projects.description} />
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => (
-            <Reveal key={project.slug} delay={Math.min(index * 0.06, 0.24)}>
-              <Card className="flex h-full flex-col">
-                <div className="flex flex-wrap items-center gap-2">
+        <div className="mt-14 border-t border-foreground/80">
+          {projects.map((project) => {
+            const shots = project.images.slice(0, 3);
+            return (
+              <article
+                key={project.slug}
+                data-project
+                className="grid gap-8 border-b py-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16"
+              >
+                <div className="flex flex-col items-start">
                   <StatusBadge status={project.status} />
-                  {project.ai?.enabled && (
-                    <Badge tone="info">{t.projects.aiIntegrated}</Badge>
-                  )}
-                  {project.isPlanned && (
-                    <Badge tone="warning">{t.projects.plannedCapabilities}</Badge>
-                  )}
-                </div>
+                  <h3 className="font-display mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+                    {project.title}
+                  </h3>
+                  <p className="mt-1 text-muted">{project.category[locale]}</p>
+                  <p className="text-pretty mt-5 max-w-[56ch] text-base">
+                    {project.shortDescription[locale]}
+                  </p>
 
-                <p className="mt-4 text-xs font-medium uppercase tracking-wide text-slate-500">
-                  {project.category[locale]}
-                </p>
-                <h3 className="mt-1 text-xl font-semibold text-slate-900 dark:text-white">
-                  {project.title}
-                </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                  {project.shortDescription[locale]}
-                </p>
+                  <p className="mt-5 max-w-[56ch] text-sm text-muted">
+                    {project.technologies.join(", ")}
+                  </p>
 
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {project.technologies.slice(0, 4).map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full border border-slate-200 bg-slate-100/60 px-2.5 py-1 text-[11px] text-slate-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-400"
+                  <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium">
+                    <Link
+                      href={`/proyectos/${project.slug}`}
+                      className="inline-flex items-center gap-1 text-accent underline-offset-4 hover:underline"
                     >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.technologies.length > 4 && (
-                    <span className="rounded-full border border-slate-200 bg-slate-100/60 px-2.5 py-1 text-[11px] text-slate-500 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-500">
-                      {t.projects.moreTechPrefix}
-                      {project.technologies.length - 4}
-                    </span>
-                  )}
+                      {t.projects.viewCaseStudy}
+                      <ArrowUpRight size={16} />
+                    </Link>
+                    {project.playStoreUrl && (
+                      <a
+                        href={project.playStoreUrl}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="inline-flex items-center gap-1 text-muted underline-offset-4 hover:text-foreground hover:underline"
+                      >
+                        {t.hero.play}
+                        <ArrowUpRight size={14} />
+                      </a>
+                    )}
+                    {(project.projectUrl ?? project.demoUrl) && (
+                      <a
+                        href={(project.projectUrl ?? project.demoUrl) as string}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="inline-flex items-center gap-1 text-muted underline-offset-4 hover:text-foreground hover:underline"
+                      >
+                        {t.projectPage.viewProject}
+                        <ArrowUpRight size={14} />
+                      </a>
+                    )}
+                  </div>
                 </div>
 
-                <Link
-                  href={`/proyectos/${project.slug}`}
-                  className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-violet-600 transition-colors hover:text-violet-500 dark:text-violet-300 dark:hover:text-violet-200"
-                >
-                  {t.projects.viewCaseStudy}
-                  <ArrowUpRight size={16} />
-                </Link>
-              </Card>
-            </Reveal>
-          ))}
+                <div>
+                  {shots.length > 0 && (
+                    <div className="mb-8 grid grid-cols-3 gap-3 sm:gap-5">
+                      {shots.map((src, i) => (
+                        <div key={src} data-speed={[1, 2, 3][i]} className={i === 1 ? "mt-8" : ""}>
+                          <Image
+                            src={src}
+                            alt={`${project.title}, pantalla ${i + 1}`}
+                            width={1080}
+                            height={1920}
+                            sizes="(min-width: 1024px) 18vw, 30vw"
+                            className="h-auto w-full rounded-xl border shadow-sm"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <p className="text-pretty max-w-[56ch] text-base text-muted">
+                    {project.myRole[locale]}
+                  </p>
+                  {project.operator && (
+                    <p className="mt-2 text-sm text-muted">
+                      {t.projects.operatedBy} {project.operator}.
+                    </p>
+                  )}
+                </div>
+              </article>
+            );
+          })}
         </div>
       </Container>
     </section>

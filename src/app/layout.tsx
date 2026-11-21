@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import { BackgroundDecor } from "@/components/ui/BackgroundDecor";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeProvider, themeInitScript } from "@/components/ThemeProvider";
 import { LocaleProvider } from "@/i18n/LocaleContext";
 import { siteConfig } from "@/data/site-config";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const display = Bricolage_Grotesque({
+  variable: "--font-display",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const body = Hanken_Grotesk({
+  variable: "--font-body",
   subsets: ["latin"],
 });
 
@@ -65,12 +64,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${display.variable} ${body.variable} dark h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
           <LocaleProvider>
-            <BackgroundDecor />
             <Navbar />
             <main className="flex-1">{children}</main>
             <Footer />

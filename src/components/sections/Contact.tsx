@@ -46,29 +46,36 @@ export function Contact() {
   }
 
   return (
-    <section id="contacto" className="relative py-20 sm:py-28">
+    <section id="contacto" className="scroll-mt-16 border-t py-20 sm:py-28">
       <Container>
-        <div className="mx-auto max-w-3xl">
-          <div className="text-center">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-600 dark:text-violet-300/80">
-              {t.contact.eyebrow}
-            </span>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
+          <div>
+            <h2 className="font-display text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
               {t.contact.title}
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-balance text-base text-slate-600 dark:text-slate-400 sm:text-lg">
+            <p className="text-pretty mt-4 max-w-[48ch] text-lg text-muted">
               {t.contact.paragraph}
+            </p>
+            <p className="mt-8 flex items-center gap-2 text-sm text-muted">
+              <Mail size={16} />
+              <span>
+                {t.contact.writeDirectly}{" "}
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="text-foreground underline underline-offset-4 hover:text-accent"
+                >
+                  {siteConfig.email}
+                </a>
+              </span>
             </p>
           </div>
 
-          <div className="mt-12 rounded-2xl border border-slate-200 bg-slate-50 p-6 dark:border-white/10 dark:bg-white/[0.02] sm:p-8">
+          <div>
             {status === "sent" ? (
               <div className="flex flex-col items-center gap-3 py-10 text-center">
-                <CheckCircle2 className="text-emerald-500 dark:text-emerald-400" size={40} />
-                <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
-                  {t.contact.sentTitle}
-                </h3>
-                <p className="max-w-sm text-sm text-slate-600 dark:text-slate-400">
+                <CheckCircle2 className="text-live" size={40} />
+                <h3 className="font-display text-xl font-semibold">{t.contact.sentTitle}</h3>
+                <p className="max-w-sm text-sm text-muted">
                   {t.contact.sentParagraph}
                 </p>
                 <Button
@@ -167,7 +174,9 @@ export function Contact() {
 
                 <div className="sm:col-span-2">
                   {status === "error" && (
-                    <p className="mb-4 text-sm text-rose-600 dark:text-rose-400">{errorMessage}</p>
+                    <p role="alert" className="mb-4 text-sm text-red-600 dark:text-red-400">
+                      {errorMessage}
+                    </p>
                   )}
                   <Button
                     type="submit"
@@ -182,18 +191,6 @@ export function Contact() {
             )}
           </div>
 
-          <div className="mt-6 flex items-center justify-center gap-2 text-sm text-slate-500">
-            <Mail size={16} />
-            <span>
-              {t.contact.writeDirectly}{" "}
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-slate-900 dark:text-slate-300 dark:decoration-white/20 dark:hover:text-white"
-              >
-                {siteConfig.email}
-              </a>
-            </span>
-          </div>
         </div>
       </Container>
     </section>
@@ -201,7 +198,7 @@ export function Contact() {
 }
 
 const inputClass =
-  "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-colors focus:border-violet-400/60 focus:ring-2 focus:ring-violet-400/20 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-violet-400/50";
+  "w-full rounded-md border border-foreground/25 bg-surface px-4 py-3 text-base text-foreground placeholder:text-muted/70 outline-none transition-colors focus:border-accent focus-visible:outline-2 focus-visible:outline-accent";
 
 function Field({
   label,
@@ -216,7 +213,7 @@ function Field({
 }) {
   return (
     <div className={className}>
-      <label htmlFor={htmlFor} className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">
+      <label htmlFor={htmlFor} className="mb-2 block text-sm font-medium">
         {label}
       </label>
       {children}

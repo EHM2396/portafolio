@@ -3,7 +3,11 @@ export type Locale = "es" | "en";
 export type LocalizedText = Record<Locale, string>;
 export type LocalizedTextList = Record<Locale, string[]>;
 
-export type ProjectStatus = "Disponible" | "En desarrollo" | "Proyecto privado";
+export type ProjectStatus =
+  | "En producción"
+  | "Disponible"
+  | "En desarrollo"
+  | "Proyecto privado";
 
 export interface ProjectAi {
   enabled: boolean;
@@ -23,6 +27,10 @@ export interface Project {
   technologies: string[];
   /** Puede ir vacío mientras no existan capturas reales. */
   images: string[];
+  /** Ficha en Google Play, si la app está publicada. */
+  playStoreUrl?: string;
+  /** Empresa que opera y factura el producto (ej. BUILDEV). */
+  operator?: string;
   demoUrl?: string;
   /** Aclaración corta que acompaña al botón de demo (ej. estado real del entorno, sin planes/precios aún). */
   demoNote?: LocalizedText;
